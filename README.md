@@ -2,15 +2,11 @@
 Are you drunk? Tired of feeling black and white? Well, stop fumbling with those greased up chickens and delete ALL OF YOUR REDDIT COMMENTS. This cannot be undone. Follow instructions. That can be done. Hopefully.
 
 # Dependencies
-Python
-
-JDK 8
-
-Firefox
-
-Geckodriver
-
-VCforPython27
+Firefox https://www.mozilla.org/en-US/firefox/new/
+Python https://www.python.org/download/releases/2.7/
+JDK 8 https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+Geckodriver https://github.com/mozilla/geckodriver/releases
+VCforPython27 https://www.microsoft.com/en-us/download/details.aspx?id=44266
 
 # Dependency installation insructons
 Draw the rest of the fucking owl
