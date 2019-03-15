@@ -3,9 +3,13 @@ Are you drunk? Tired of feeling black and white? Well, stop fumbling with those 
 
 # Dependencies
 Firefox https://www.mozilla.org/en-US/firefox/new/
+
 Python https://www.python.org/download/releases/2.7/
+
 JDK 8 https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
 Geckodriver https://github.com/mozilla/geckodriver/releases
+
 VCforPython27 https://www.microsoft.com/en-us/download/details.aspx?id=44266
 
 # Dependency installation insructons
