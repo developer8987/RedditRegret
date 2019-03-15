@@ -3,9 +3,14 @@ Are you drunk? Tired of feeling black and white? Well, stop fumbling with those 
 
 # Dependencies
 Python
-JDK
+
+JDK 8
+
 Firefox
+
 Geckodriver
+
+VCforPython27
 
 # Dependency installation insructons
 Draw the rest of the fucking owl
