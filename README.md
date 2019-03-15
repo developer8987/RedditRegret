@@ -1,5 +1,5 @@
 # RedditRegret
-Are you drunk? Tired of feeling black and white? Well, stop fumbling with those greased up chickens and delete ALL OF YOUR REDDIT COMMENTS. This cannot be undone. Follow instructions. That can be done. Hopefully.
+Are you drunk? Tired of feeling black and white? Well, stop fumbling with those greased up chickens and delete ALL OF YOUR REDDIT COMMENTS. This cannot be undone. Follow instructions. That can hopefully be done.
 
 # Dependencies
 Firefox https://www.mozilla.org/en-US/firefox/new/
@@ -12,8 +12,8 @@ Geckodriver https://github.com/mozilla/geckodriver/releases
 
 VCforPython27 https://www.microsoft.com/en-us/download/details.aspx?id=44266
 
-# Dependency installation insructons
-Draw the rest of the fucking owl
+# Dependency installation insructions
+Draw the rest of the fucking owl!
 
 # Instructions
 After installing the dependencies, open terminal or cmd, navigate to the directory of the RedditRegret.py script, and type the following, replacing USERNAME with your username, and PASSWORD with your password. Your username and password will immediately be transferred to the CIA via carrier pigeon. To opt-out, please donate $5 to the charity of your choice:
