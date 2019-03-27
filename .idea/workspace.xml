@@ -13,7 +13,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/venv/RedditRegret.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="39">
               <caret line="71" column="12" selection-start-line="71" selection-start-column="12" selection-end-line="71" selection-end-column="12" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -23,6 +23,9 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -36,11 +39,13 @@
     <option name="width" value="2140" />
     <option name="height" value="1400" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -57,7 +62,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -112,10 +116,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="120" y="0" width="1712" height="1120" extended-state="1" />
-    <editor active="true" />
+    <frame x="120" y="0" width="1712" height="1120" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20762712" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21004842" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -139,7 +142,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/venv/RedditRegret.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="39">
           <caret line="71" column="12" selection-start-line="71" selection-start-column="12" selection-end-line="71" selection-end-column="12" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
