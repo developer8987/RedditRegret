@@ -1,83 +1,107 @@
 import sys
-from selenium.webdriver.common.by import By
+import time
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
-import time
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 
-#WebDriver setup
+#Constants
+website_url = "https://old.reddit.com"
+username_field_xpath = "//input[@placeholder='username']"
+password_field_xpath = "//input[@placeholder='password']"
+submit_button_xpath = "//button[text()='login']"
+username_button_xpath = "//span[@class='user']//a[contains(@href, 'https://old.reddit.com/user/')]"
+comments_link_xpath = "//a[contains(text(),'Comments')]"
+comments_error_xpath = "//div[@class='ProfileCommentsPage__error']"
+
+#WebDriver setup (you need to have Chromedriver installed, look it up)
 print "Setting up WebDriver..."
-rp = 'firebug-2.0.19.xpi'
-firefoxProfile = webdriver.FirefoxProfile()
-firefoxProfile.add_extension(rp)
-driver = webdriver.Firefox(firefox_profile=firefoxProfile)
-mouse = webdriver.ActionChains(driver)
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+driver = webdriver.Chrome(chrome_options=chrome_options)
 print "*** DONE ***"
 
 #Open Reddit
 print "Loading (old) Reddit site..."
-driver.get("https://old.reddit.com")
-wait = ui.WebDriverWait(driver,10)
+driver.get(website_url)
+wait = WebDriverWait(driver,10)
 print "*** DONE ***"
 
 #Log in
 print "Logging in using the provided username and password..."
-username_field = driver.find_element_by_xpath("//input[@placeholder='username']")
-password_field = driver.find_element_by_xpath("//input[@placeholder='password']")
-submit_button = driver.find_element_by_xpath("//button[@type='submit']")
-username = sys.argv[1]
-password = sys.argv[2]
+try:
+    username = sys.argv[1]
+    password = sys.argv[2]
+except:
+    print """ *** ERROR ***
+    You must provide a username and a password as command line arguments. This program will now stop.
+    Please rerun the script in the following manner: '~ python RedditRegret.py myusername mypassword'
+    *** ERROR *** """
+    exit()
+wait.until(EC.element_to_be_clickable((By.XPATH, username_field_xpath)))
+username_field = driver.find_element_by_xpath(username_field_xpath)
 username_field.send_keys(username)
+wait.until(EC.element_to_be_clickable((By.XPATH, password_field_xpath)))
+password_field = driver.find_element_by_xpath(password_field_xpath)
 password_field.send_keys(password)
+wait.until(EC.element_to_be_clickable((By.XPATH, submit_button_xpath)))
+submit_button = driver.find_element_by_xpath(submit_button_xpath)
 submit_button.click()
-time.sleep(2)
 print "*** DONE ***"
 
 #Go to comment history
 print "Navigating to comment history..."
-username_button = driver.find_element_by_xpath("/html[1]/body[1]/div[2]/div[3]/span[1]/a[1]")
-time.sleep(2)
+wait.until(EC.element_to_be_clickable((By.XPATH, username_button_xpath)))
+username_button = driver.find_element_by_xpath(username_button_xpath)
 username_button.click()
-time.sleep(2)
-comments_link = driver.find_element_by_xpath("//a[contains(text(),'Comments')]")
+wait.until(EC.element_to_be_clickable((By.XPATH, comments_link_xpath)))
+comments_link = driver.find_element_by_xpath(comments_link_xpath)
 comments_link.click()
-time.sleep(2)
 print "*** DONE ***"
 
-#Confirm to proceed
-print ""
-print "*** WARNING ***"
-print "You are about to erase your entire comment history! This cannot be undone!"
-print "*** WARNING ***"
-
-confirm_delete_all_comments = raw_input("Please type 'DELETE' in ALL CAPS to ERASE ALL COMMENTS: ")
-if confirm_delete_all_comments != "DELETE":
-	sys.exit()
+#Check if there are comments, and confirm to proceed
+try:
+    nocomments = driver.find_element_by_xpath(comments_error_xpath)
+    print "\n*** LOOKS LIKE YOU HAVE NO COMMENTS! EXITING! *** \n\nThank you for using RedditRegret."
+    sys.exit()
+except Exception:
+    print """ 
+    *** WARNING ***
+    You are about to erase your entire comment history! This cannot be undone!
+    *** WARNING *** """
+    confirm_delete_all_comments = raw_input("Please type 'DELETE' in ALL CAPS to ERASE ALL COMMENTS: ")
+    if confirm_delete_all_comments != "DELETE":
+	    print "GOOD CHOICE"
+	    sys.exit()
 
 #DELETE COMMENT LOOP
 print "Deleting comments..."
 counter = 1
 page = 1
+try:
+    while True:
+        while counter < 50:
+            # time.sleep(0.2)
+            delete_link = driver.find_element_by_link_text('delete')
+            delete_link.click()
+            yes_link = driver.find_element_by_link_text('yes')
+            yes_link.click()
+            counter = counter + 2
+            print "Deleted " + str(page) + " comments..."
+            page = page + 1
+        driver.refresh()
+        # time.sleep(0.2)
+        counter = 1
+except NoSuchElementException:
+    print """ 
 
-while True:
-    while counter < 50:
-        #time.sleep(0.2)
-        delete_link = driver.find_element_by_link_text('delete')
-        delete_link.click()
+    *** DONE! ***
 
-        yes_link = driver.find_element_by_link_text('yes')
-        yes_link.click()
-        counter = counter + 2
-        print "Deleted " + str(page) + " comments..."
-        page = page + 1
-
-    driver.refresh()
-    #time.sleep(0.2)
-    counter = 1
+    Looks like we couldn't find a delete button.
+    Either you're all out of comments,
+    ...or we're all out of options. Thanks for using RedditRegret. """
+    exit()
