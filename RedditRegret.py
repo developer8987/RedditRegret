@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""RedditRegret - delete all your comments!"""
+
+import os
 import sys
 import time
 from selenium import webdriver
