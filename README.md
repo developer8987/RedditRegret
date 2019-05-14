@@ -1,5 +1,8 @@
 # RedditRegret
-Are you drunk? Tired of feeling black and white? Well, stop fumbling with those greased up chickens and delete ALL OF YOUR REDDIT COMMENTS. This cannot be undone. Follow instructions. That can hopefully be done.
+This script goes into your comment history and deletes all of your comments. The only arguments are username and password:
+
+# Usage
+$ python RedditRegret.py myusername mypassword
 
 # Dependencies
 Chrome https://www.google.com/chrome/
