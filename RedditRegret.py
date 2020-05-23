@@ -89,6 +89,7 @@ except Exception:
 
 # DELETE COMMENT LOOP
 print "Deleting comments..."
+
 counter = 1
 page = 1
 try:
