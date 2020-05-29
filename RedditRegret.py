@@ -24,6 +24,7 @@ comments_link_xpath = "//a[text()='comments']"
 comments_error_xpath = "//div[@class='ProfileCommentsPage__error']"
 upvote_count_xpath = ".//span[@class='score likes']"
 main_comment_xpath = "//div[@data-type='comment']"
+next_button_xpath = "//span[@class='next-button']//a[contains(text(),'next')]"
 
 # WebDriver setup (you need to have Chromedriver installed, look it up)
 print "Setting up WebDriver..."
@@ -44,9 +45,10 @@ print "Logging in using the provided username and password..."
 try:
     username = sys.argv[1]
     password = sys.argv[2]
+    minUpvotes = int(sys.argv[3])
 except:
     print """ *** ERROR ***
-    You must provide a username and a password as command line arguments. This program will now stop.
+    You must provide a username, a password, and upvote minimum as command line arguments. This program will now stop.
     Please rerun the script in the following manner: '~ python RedditRegret.py myusername mypassword'
     *** ERROR *** """
     exit()
@@ -90,26 +92,31 @@ except Exception:
 # DELETE COMMENT LOOP
 print "Deleting comments..."
 
-counter = 1
+counter = 0
 page = 1
 try:
     while True:
         time.sleep(0.2)
         mainElementList = driver.find_elements_by_xpath(main_comment_xpath)
         for element in mainElementList:
-            commentCount = element.find_element_by_xpath(upvote_count_xpath).get_attribute('Title')
-            print commentCount
-            if int(commentCount) < 11:
-                time.sleep(0.2)
+            upvotes = element.find_element_by_xpath(upvote_count_xpath).get_attribute('Title')
+            if int(upvotes) < minUpvotes:
+                time.sleep(0.5)
                 delete_link = element.find_element_by_link_text('delete')
                 delete_link.click()
-                time.sleep(0.2)
+                time.sleep(0.5)
                 yes_link = element.find_element_by_link_text('yes')
                 yes_link.click()
-                print "Deleted " + str(page) + " comments..."
+                print "Deleting comment with " + upvotes + " upvotes. TOTAL DELETED: " + str(page)
                 page = page + 1
+            counter += 1
+        if counter == 25:
+            driver.refresh()
+            print "Going to next page..."
+            next_button = driver.find_element_by_xpath(next_button_xpath)
+            next_button.click()
+            counter = 0
 
-        driver.refresh()
         time.sleep(0.2)
 except NoSuchElementException:
     print """ 
@@ -119,4 +126,5 @@ except NoSuchElementException:
     Looks like we couldn't find a delete button.
     Either you're all out of comments,
     ...or we're all out of options. Thanks for using RedditRegret. """
+    raise
     exit()
